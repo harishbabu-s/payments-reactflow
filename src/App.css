@@ -1,0 +1,7 @@
+.canvas {
+  width: '90vw';
+  height: '90vh';
+  border: '1px solid black';
+  margin-inline: '5vw';
+  margin-top: '5vh'
+}
