@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { ReactFlow, useNodesState, useEdgesState, MiniMap } from '@xyflow/react';
+import { ReactFlow, useNodesState, useEdgesState, MiniMap, addEdge, Controls } from '@xyflow/react';
 
 import { initialNodes } from './Nodes/MainNodes';
-import { initialEdges } from './Edges/CustomEdges';
+import { initialEdges, CustomEdge } from './Edges/CustomEdges';
 import {addNode, deleteNode} from './AddAndDeleteNode'
 import PaymentOptionNode  from './Nodes/PaymentsNode';
 import PaymentAmountNode from './Nodes/PaymentAmount';
@@ -22,10 +22,24 @@ const OnlinePayments = () => {
         paymentPlatform : PaymentPlatformNode
     }
 
+    const edgeType = {
+        custom: CustomEdge,
+    }
+
     const handleAddNode = (label) => {
         const newNode = addNode(label, nodes);
         setNodes((nds) => nds.concat(newNode));
       };
+
+    const handleConnect = (params) => {
+        if (params.source === params.target) return;
+
+        setEdges((eds) => addEdge(params, eds))
+    }
+
+    const handleEdgeDelete = (event, edge) => {
+        setEdges((eds) => eds.filter((e) => e.id !== edge.id));
+    };
     
       const mappedNodes = nodes.map((node) => {
         if (node.type === 'paymentPlatform') {
@@ -51,8 +65,11 @@ const OnlinePayments = () => {
       nodes={mappedNodes}
       edges={edges}
       nodeTypes={nodeType}
+      edgeTypes={edgeType}
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
+      onConnect={handleConnect}
+      onEdgeDoubleClick={handleEdgeDelete}
       defaultViewport={defaultViewport}
       minZoom={0.2}
       maxZoom={2}
@@ -60,6 +77,7 @@ const OnlinePayments = () => {
       attributionPosition="bottom-left"
     >
      <MiniMap />
+     <Controls />
     </ReactFlow>
     );
 };

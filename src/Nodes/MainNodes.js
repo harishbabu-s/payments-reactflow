@@ -20,34 +20,40 @@ export const initialNodes = [
         position: { x: -100, y: 300 },
         data: {
         label: 'Payment Amount',
-        
         selectedValue: 'option1',
         onSelect: (event) => console.log(event.target.value),
+        sourcePosition: 'right',
         },
         type: 'paymentAmount',
-        },
+    },
         {
         id: 'country-us',
         position: { x: 200, y: 300 },
         data: {
         label: 'America',
         },
+        sourcePosition: 'right',
+        targetPosition: 'left',
         type: 'country',
-        },
+    },
         {
         id: 'country-uk',
         position: { x: 200, y: 400 },
         data: {
-        label: 'United Kingdom',
+            label: 'United Kingdom',
         },
+        sourcePosition: 'right',
+        targetPosition: 'left',
         type: 'country',
         },
         {
-        id: 'country-ind',
-        position: { x: 200, y: 500 },
+            id: 'country-ind',
+            position: { x: 200, y: 500 },
         data: {
-        label: 'India',
+            label: 'India',
         },
+        sourcePosition: 'right',
+        targetPosition: 'left',
         type: 'country',
         },
     ];

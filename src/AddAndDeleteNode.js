@@ -1,3 +1,4 @@
+
 export const addNode = (label, nodes) => {
     function randomInRange(min, max){
         return Math.floor(Math.random() * (max-min +1)) + min;
@@ -8,6 +9,7 @@ export const addNode = (label, nodes) => {
       position: { x: randomInRange(500,550), y: randomInRange(150,500)},
       data: {
         label: label,
+        targetPosition: 'left',
       },
       type: 'paymentPlatform',
     };
